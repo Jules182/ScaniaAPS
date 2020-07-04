@@ -1,10 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
-# %%
-# missing = df.isna().sum().div(df.shape[0]).mul(100).to_frame().sort_values(by=0, ascending = False)
-# missing.plot.bar(figsize=(50,10))
-# plt.show()
+from sklearn.preprocessing import MinMaxScaler
 
 def preprocess_data(X_train, X_test):
     # deal with missing data
@@ -22,6 +18,9 @@ def preprocess_data(X_train, X_test):
     X_test.drop(['target'], axis=1, inplace=True)
 
     X_train, X_test = drop_constant_features(X_train, X_test)
+    
+    X_train = normalize_data(X_train)
+    X_test = normalize_data(X_test)
     
     return X_train, X_test, y_train, y_test
 
@@ -56,11 +55,9 @@ def prepare_target(df):
     df = df.rename(columns={'class': 'target'})
     return df
 
-# %% [markdown]
-# Graph above shows that we have significant amount of missing data. I will drop columns containing more than 75% of missing values.
-
-
-# TODO standardize
-# def normalize_data():
-#     print("x")
+# normalize data using a MinMaxScaler to preserve the original distribution
+def normalize_data(df):
+    scaler = MinMaxScaler()
+    scaler.fit(df)
+    return pd.DataFrame(scaler.transform(df), columns=df.columns)
 
