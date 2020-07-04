@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
+from numpy import concatenate
 
 def preprocess_data(X_train, X_test):
     # deal with missing data
@@ -60,4 +61,15 @@ def normalize_data(df):
     scaler = MinMaxScaler()
     scaler.fit(df)
     return pd.DataFrame(scaler.transform(df), columns=df.columns)
+
+# undersample dataset due to highly imbalanced training data (59000 of class 0 and 1000 of class 1)
+def balance_data(features, target, n_samples):
+    idxs_pos = target[target==1].index
+    idxs_neg = target[target==0].sample(n=n_samples, replace=False, random_state=42).index
+    idxs_balanced = concatenate((idxs_pos,idxs_neg))
+    features_balanced = features.loc[idxs_balanced]
+    target_balanced = target.loc[idxs_balanced]
+
+    return features_balanced, target_balanced
+    
 
