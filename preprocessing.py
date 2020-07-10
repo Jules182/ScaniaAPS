@@ -6,7 +6,7 @@ from numpy import concatenate
 def preprocess_data(X_train, X_test):
     # deal with missing data
     X_train, X_test = drop_missing_values(X_train, X_test, threshold = 75)
-    X_train, X_test = impute_missing_values(X_train, X_test)
+    X_train, X_test = impute_missing_values(X_train, X_test, method = "mean")
     # convert class labels to target vector (pos=1, neg=0)
     X_train = prepare_target(X_train)
     X_test = prepare_target(X_test)
@@ -36,9 +36,13 @@ def drop_missing_values(df, test_df, threshold):
     return df, test_df
 
 # impute with mean
-def impute_missing_values(df, test_df):
-    df = df.fillna(df.mean())
-    test_df = test_df.fillna(df.mean())
+def impute_missing_values(df, test_df, method = "mean"):
+    if method == "mean":
+        df = df.fillna(df.mean())
+        test_df = test_df.fillna(df.mean())
+    elif method == "median":
+        df = df.fillna(df.median())
+        test_df = test_df.fillna(df.median())
     return df, test_df
 
 # remove constant features
