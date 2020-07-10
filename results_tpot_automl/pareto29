@@ -1,0 +1,9 @@
+Generation 29 - Current Pareto front scores:
+-1      -3834.0 XGBClassifier(CombineDFs(input_matrix, input_matrix), XGBClassifier__learning_rate=0.1, XGBClassifier__max_depth=8, XGBClassifier__min_child_weight=1, XGBClassifier__n_estimators=100, XGBClassifier__nthread=1, XGBClassifier__subsa
+mple=0.55)
+-2      -3524.0 GaussianNB(MLPClassifier(input_matrix, MLPClassifier__alpha=0.001, MLPClassifier__learning_rate_init=0.01))
+-3      -3032.0 GaussianNB(MLPClassifier(MLPClassifier(input_matrix, MLPClassifier__alpha=0.001, MLPClassifier__learning_rate_init=0.01), MLPClassifier__alpha=0.0001, MLPClassifier__learning_rate_init=0.01))                                      
+-4      -2838.0 GaussianNB(Normalizer(MLPClassifier(StandardScaler(input_matrix), MLPClassifier__alpha=0.01, MLPClassifier__learning_rate_init=0.001), Normalizer__norm=max))                                                                        
+-5      -2512.0 GaussianNB(Normalizer(MLPClassifier(StandardScaler(Normalizer(input_matrix, Normalizer__norm=l2)), MLPClassifier__alpha=0.01, MLPClassifier__learning_rate_init=0.001), Normalizer__norm=max))                                       
+-6      -2214.0 GaussianNB(Normalizer(SelectFwe(MLPClassifier(StandardScaler(Normalizer(input_matrix, Normalizer__norm=l2)), MLPClassifier__alpha=0.001, MLPClassifier__learning_rate_init=0.001), SelectFwe__alpha=0.028), Normal_pre_test decorator$
+ _random_mutation_operator: num_test=0 Expected n_neighbors <= n_samples,  but n_samples = 50, n_neighbors = 59.
